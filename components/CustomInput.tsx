@@ -64,6 +64,8 @@ const CustomInput = ({
           value={value}
           onChangeText={onChangeText}
           placeholder={placeholder}
+          placeholderTextColor={"#999"}
+          autoCapitalize="none"
           secureTextEntry={showPassword}
           multiline={multiline}
           numberOfLines={numberOfLines}
@@ -80,7 +82,7 @@ const CustomInput = ({
             <Ionicons
               name={showPassword ? "eye-off-outline" : "eye-outline"}
               size={24}
-              color="#666"
+              // color="#666"
               style={styles.icon}
             />
           </TouchableOpacity>
@@ -96,7 +98,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   label: {
-    fontSize: 14,
+    fontSize: 16,
+    fontWeight: "600",
     color: "#333",
     marginBottom: 5,
   },
@@ -105,8 +108,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderWidth: 1,
     borderColor: "#ccc",
-    borderRadius: 8,
-    paddingHorizontal: 10,
+    borderRadius: 12,
     backgroundColor: "#fff",
   },
   focused: {
@@ -121,7 +123,7 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     fontSize: 16,
-    paddingVertical: 12,
+    paddingVertical: 18,
     color: "#333",
   },
   multiline: {
@@ -129,7 +131,7 @@ const styles = StyleSheet.create({
     textAlignVertical: "top",
   },
   errorText: {
-    fontSize: 12,
+    fontSize: 14,
     color: "#ff0000",
     marginTop: 5,
   },

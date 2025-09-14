@@ -41,24 +41,8 @@ export const signUpSchema = baseAuthSchema
       .string()
       .min(1, "Phone number is required")
       .max(10, "Phone number must be less than 10 character"),
-    preferences: z.array(
-      z.enum([
-        "Concert",
-        "Sports",
-        "Theater",
-        "Comedy",
-        "Festival",
-        "Exhibition",
-        "Conference",
-        "Workshop",
-        "Party",
-        "Other",
-      ])
-    ),
+
     confirmPassword: z.string().min(1, "Confirm password is required"),
-    socialInstagram: z.string().optional(),
-    socialFacebook: z.string().optional(),
-    socialTwitter: z.string().optional(),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match",

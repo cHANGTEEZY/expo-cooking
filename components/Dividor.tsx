@@ -11,7 +11,7 @@ type DividerProps = {
 const Divider = ({
   dividerText,
   lineColor = "#CBD5E1", // slate-300
-  textColor = "#1F2937", // slate-800
+  textColor = "#eeeeee", //white hex
   style = {},
 }: DividerProps) => {
   return (
