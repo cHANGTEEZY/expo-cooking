@@ -20,6 +20,7 @@ type CustomButtonProps = {
   icon?: keyof typeof Ionicons.glyphMap;
   children?: React.ReactNode; // render custom children if needed
   style?: ViewStyle;
+  disabled?: boolean;
 };
 
 const CustomButton = ({
@@ -33,12 +34,14 @@ const CustomButton = ({
   icon,
   children,
   style,
+  disabled,
 }: CustomButtonProps) => {
   const ButtonContent = () => (
     <TouchableOpacity
       activeOpacity={0.7}
       onPress={handlePress}
       style={[styles.button, style]}
+      disabled={disabled}
     >
       {icon && (
         <Ionicons

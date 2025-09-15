@@ -33,10 +33,7 @@ export const signUpSchema = baseAuthSchema
       .string()
       .min(1, "Last name is required")
       .max(15, "Last name must be less than 15 characters"),
-    otpCode: z
-      .string()
-      .min(1, "OTP code is required")
-      .max(6, "OTP code lenght should be 6 "),
+    otpCode: z.string().optional(),
     phoneNumber: z
       .string()
       .min(1, "Phone number is required")

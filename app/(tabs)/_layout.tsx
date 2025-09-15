@@ -41,7 +41,7 @@ const TabsLayout = () => {
           ),
         }}
       />
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="Search"
         options={{
           headerShown: false,
@@ -64,7 +64,7 @@ const TabsLayout = () => {
             </View>
           ),
         }}
-      />
+      /> */}
       <Tabs.Screen
         name="Profile"
         options={{
@@ -77,7 +77,7 @@ const TabsLayout = () => {
           ),
         }}
       />
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="Settings"
         options={{
           headerShown: false,
@@ -88,7 +88,7 @@ const TabsLayout = () => {
             </View>
           ),
         }}
-      />
+      /> */}
     </Tabs>
   );
 };

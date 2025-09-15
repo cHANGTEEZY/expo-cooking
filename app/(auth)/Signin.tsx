@@ -7,12 +7,14 @@ import {
   signInSchemaType,
 } from "@/features/Auth/schemas/auth-schema";
 import useIsKeyboardVisible from "@/hooks/utils/useIsKeyboardVisible";
+import { useSignIn } from "@clerk/clerk-expo";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import {
+  ActivityIndicator,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -20,12 +22,14 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Toast } from "toastify-react-native";
 
 const Signin = () => {
   const [showPassword, setShowPassword] = React.useState(true);
+  const [isLoading, setIsLoading] = React.useState(false);
   const { isKeyboardVisible } = useIsKeyboardVisible();
   const router = useRouter();
-
+  const { signIn, setActive, isLoaded } = useSignIn();
   const {
     control,
     formState: { errors, isSubmitting },
@@ -35,9 +39,55 @@ const Signin = () => {
     resolver: zodResolver(signInSchema),
   });
 
-  const handleSubmitForm = (data: signInSchemaType) => {
-    console.log("Submitted data: ", data);
+  const handleSubmitForm = async (data: signInSchemaType) => {
+    if (!isLoaded) return;
+
+    try {
+      setIsLoading(true);
+      const signInAttempt = await signIn.create({
+        identifier: data.emailOrUsername,
+        password: data.password,
+      });
+
+      if (signInAttempt.status === "complete") {
+        await setActive({ session: signInAttempt.createdSessionId });
+        router.replace("/(tabs)/Home");
+      } else {
+        Toast.show({
+          type: "error",
+          text1: "Sign In Failed",
+          text2: "Unable to complete sign in. Please try again.",
+          position: "top",
+          visibilityTime: 4000,
+          autoHide: true,
+        });
+        console.error(JSON.stringify(signInAttempt, null, 2));
+      }
+      setIsLoading(false);
+    } catch (error: any) {
+      console.error("Error signing in: ", error);
+      Toast.show({
+        type: "error",
+        text1: "Sign In Failed",
+        text2: error?.message || "Please check your credentials and try again.",
+        position: "top",
+        visibilityTime: 4000,
+        autoHide: true,
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
+
+  if (isLoading) {
+    return (
+      <ActivityIndicator
+        size="large"
+        color="#4A90E2"
+        style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+      />
+    );
+  }
 
   return (
     <LinearGradient
@@ -107,6 +157,7 @@ const Signin = () => {
                   buttonText="Sign In"
                   icon="log-in-outline"
                   handlePress={handleSubmit(handleSubmitForm)}
+                  disabled={isSubmitting || isLoading}
                 />
                 <Dividor dividerText="Or" textColor="grey" />
                 <CustomButton
