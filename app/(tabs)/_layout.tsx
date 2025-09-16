@@ -1,7 +1,37 @@
 import { Feather } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
 import { Tabs } from "expo-router";
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { Dimensions, StyleSheet, View } from "react-native";
+
+const ScreenWidth = Dimensions.get("window").width;
+
+const TabBarItem = ({
+  name,
+  color,
+  focused,
+}: {
+  name: string;
+  color: string;
+  focused: boolean;
+}) => {
+  const content = <Feather name={name as any} size={24} color={color} />;
+
+  if (focused) {
+    return (
+      <LinearGradient
+        colors={["#4c1fa6", "#cfc8de", "#4c1fa6"]}
+        start={{ x: 0, y: 1 }}
+        end={{ x: 1, y: 0 }}
+        style={[styles.tabIconContainer]}
+      >
+        {content}
+      </LinearGradient>
+    );
+  } else {
+    return <View style={styles.tabIconContainer}>{content}</View>;
+  }
+};
 
 const TabsLayout = () => {
   return (
@@ -9,24 +39,42 @@ const TabsLayout = () => {
       screenOptions={{
         tabBarStyle: {
           position: "absolute",
+          marginHorizontal: ScreenWidth * 0.13,
           bottom: 20,
-          left: 20,
-          right: 20,
-          marginHorizontal: 20,
           height: 65,
-          borderRadius: 40,
-          backgroundColor: "black",
-          borderTopWidth: 0,
-          shadowColor: "grey",
+          borderColor: "transparent",
+          borderWidth: 0,
+          shadowColor: "#000000",
           shadowOffset: { width: 0, height: 8 },
-          shadowOpacity: 0.8,
-          shadowRadius: 10,
-          elevation: 8,
+          shadowOpacity: 0.234,
+          shadowRadius: 50,
+          elevation: 10,
+          paddingBottom: 8,
+          paddingTop: 13,
+          backgroundColor: "transparent",
         },
-
-        tabBarActiveTintColor: "white",
-        tabBarInactiveTintColor: "rgba(255, 255, 255, 0.6)",
+        tabBarBackground: () => (
+          <LinearGradient
+            colors={["#9430bf", "#604c8a", "#321273"]}
+            style={{
+              flex: 1,
+              borderColor: "transparent",
+              borderRadius: 50,
+            }}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+          />
+        ),
+        tabBarActiveTintColor: "black",
+        tabBarInactiveTintColor: "white",
         tabBarShowLabel: false,
+        tabBarItemStyle: {
+          justifyContent: "center",
+          alignItems: "center",
+          flex: 1,
+          paddingBottom: 0,
+          paddingTop: 0,
+        },
       }}
     >
       <Tabs.Screen
@@ -34,61 +82,28 @@ const TabsLayout = () => {
         options={{
           headerShown: false,
           tabBarIcon: ({ focused, color }) => (
-            <View style={styles.tabIconContainer}>
-              <Feather name="home" size={24} color={color} />
-              {focused && <View style={styles.activeDot} />}
-            </View>
-          ),
-        }}
-      />
-      {/* <Tabs.Screen
-        name="Search"
-        options={{
-          headerShown: false,
-          tabBarIcon: ({ focused, color }) => (
-            <View style={styles.tabIconContainer}>
-              <Feather name="search" size={24} color={color} />
-              {focused && <View style={styles.activeDot} />}
-            </View>
+            <TabBarItem name="home" color={color} focused={focused} />
           ),
         }}
       />
       <Tabs.Screen
-        name="Favorites"
+        name="Search"
         options={{
           headerShown: false,
           tabBarIcon: ({ focused, color }) => (
-            <View style={styles.tabIconContainer}>
-              <Feather name="heart" size={24} color={color} />
-              {focused && <View style={styles.activeDot} />}
-            </View>
+            <TabBarItem name="search" color={color} focused={focused} />
           ),
         }}
-      /> */}
+      />
       <Tabs.Screen
         name="Profile"
         options={{
           headerShown: false,
           tabBarIcon: ({ focused, color }) => (
-            <View style={styles.tabIconContainer}>
-              <Feather name="user" size={24} color={color} />
-              {focused && <View style={styles.activeDot} />}
-            </View>
+            <TabBarItem name="user" color={color} focused={focused} />
           ),
         }}
       />
-      {/* <Tabs.Screen
-        name="Settings"
-        options={{
-          headerShown: false,
-          tabBarIcon: ({ focused, color }) => (
-            <View style={styles.tabIconContainer}>
-              <Feather name="settings" size={24} color={color} />
-              {focused && <View style={styles.activeDot} />}
-            </View>
-          ),
-        }}
-      /> */}
     </Tabs>
   );
 };
@@ -97,16 +112,18 @@ const styles = StyleSheet.create({
   tabIconContainer: {
     alignItems: "center",
     justifyContent: "center",
+    borderRadius: 100,
     height: 48,
+    borderColor: "transparent",
+    borderWidth: 0,
     width: 48,
-    top: 10,
-    position: "relative",
   },
   activeDot: {
-    position: "absolute",
     bottom: -10,
     width: 6,
     height: 6,
+    borderColor: "transparent",
+    borderWidth: 0,
     borderRadius: 3,
     backgroundColor: "white",
   },

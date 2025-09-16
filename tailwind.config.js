@@ -8,9 +8,9 @@ module.exports = {
       colors: {
         primary: "#4e0189",
         accent: "#a995ce",
-        secondaty: "#2f3a4b",
+        secondary: "#2f3a4b",
         muted: "#1f1f1f",
-        background: "#222834",
+        primaryPurple: "#A28FF9",
         mutedWhite: "#f0ede4",
       },
       fontFamily: {

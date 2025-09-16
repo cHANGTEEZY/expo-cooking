@@ -3,6 +3,7 @@ import { tokenCache } from "@clerk/clerk-expo/token-cache";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Slot } from "expo-router";
 import ToastManager from "toastify-react-native";
+import "./globals.css";
 
 const queryClient = new QueryClient();
 
