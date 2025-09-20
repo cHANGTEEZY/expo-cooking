@@ -207,39 +207,6 @@ const Profile = () => {
             </View>
           </View>
 
-          {/* Ticket Management Section */}
-          <View className="px-8 pb-6">
-            <Text className="text-xl font-bold mb-4">Ticket Management</Text>
-            <View className="bg-gray-50 rounded-2xl p-4">
-              <ProfileItem
-                icon="Scan"
-                title="Scan New Ticket"
-                onPress={() => router.push("/scan-ticket")}
-              />
-              <ProfileItem
-                icon="FolderOpen"
-                title="My Tickets"
-                onPress={() => router.push("/tickets")}
-              />
-              <ProfileItem
-                icon="Archive"
-                title="Archived Tickets"
-                onPress={() => router.push("/archived-tickets")}
-              />
-              <ProfileItem
-                icon="Download"
-                title="Import from Photos"
-                onPress={() => console.log("Import from photos")}
-              />
-              <ProfileItem
-                icon="Upload"
-                title="Export Tickets"
-                onPress={() => console.log("Export tickets")}
-                showArrow={true}
-              />
-            </View>
-          </View>
-
           {/* Settings Section */}
           <View className="px-8 pb-6">
             <Text className="text-xl font-bold mb-4">Settings</Text>
@@ -291,38 +258,6 @@ const Profile = () => {
                   />
                 }
                 showArrow={false}
-              />
-            </View>
-          </View>
-
-          {/* App Management Section */}
-          <View className="px-8 pb-6">
-            <Text className="text-xl font-bold mb-4">App Management</Text>
-            <View className="bg-gray-50 rounded-2xl p-4">
-              <ProfileItem
-                icon="Database"
-                title="Storage Usage"
-                onPress={() => console.log("Storage usage")}
-              />
-              <ProfileItem
-                icon="Trash2"
-                title="Clear Cache"
-                onPress={() =>
-                  Alert.alert(
-                    "Clear Cache",
-                    "Are you sure you want to clear the app cache?"
-                  )
-                }
-              />
-              <ProfileItem
-                icon="Download"
-                title="Backup Data"
-                onPress={() => console.log("Backup data")}
-              />
-              <ProfileItem
-                icon="RotateCcw"
-                title="Restore Data"
-                onPress={() => console.log("Restore data")}
               />
             </View>
           </View>

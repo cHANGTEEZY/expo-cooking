@@ -2,7 +2,14 @@ import CurrentTime from "@/utils/currentTime";
 import { useUser } from "@clerk/clerk-expo";
 import { useRouter } from "expo-router";
 import React from "react";
-import { Dimensions, Image, Pressable, Text, View } from "react-native";
+import {
+  Dimensions,
+  Image,
+  Pressable,
+  StatusBar,
+  Text,
+  View,
+} from "react-native";
 
 const ScreenHeight = Dimensions.get("window").height;
 
@@ -13,6 +20,7 @@ const Home = () => {
 
   return (
     <View style={{ flex: 1 }}>
+      <StatusBar barStyle={"light-content"} />
       <View
         style={{
           flexDirection: "row",

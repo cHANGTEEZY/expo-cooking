@@ -39,7 +39,7 @@ const TabsLayout = () => {
       screenOptions={{
         tabBarStyle: {
           position: "absolute",
-          marginHorizontal: ScreenWidth * 0.13,
+          marginHorizontal: ScreenWidth * 0.07,
           bottom: 20,
           height: 65,
           borderColor: "transparent",
@@ -96,6 +96,15 @@ const TabsLayout = () => {
         }}
       />
       <Tabs.Screen
+        name="Events"
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ focused, color }) => (
+            <TabBarItem name="star" color={color} focused={focused} />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="Profile"
         options={{
           headerShown: false,
@@ -112,11 +121,14 @@ const styles = StyleSheet.create({
   tabIconContainer: {
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 100,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    borderBottomRightRadius: 30,
+    borderBottomLeftRadius: 30,
     height: 48,
     borderColor: "transparent",
     borderWidth: 0,
-    width: 48,
+    width: ScreenWidth * 0.178,
   },
   activeDot: {
     bottom: -10,
