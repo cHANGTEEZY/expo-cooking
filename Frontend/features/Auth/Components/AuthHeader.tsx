@@ -1,4 +1,3 @@
-import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 
 type AuthHeaderProps = {
@@ -49,7 +48,6 @@ const styles = StyleSheet.create({
     width: 120,
     height: 120,
     resizeMode: "contain",
-    // Uncomment if you want the rotation effect
     // transform: [{ rotate: "-10deg" }],
   },
 
